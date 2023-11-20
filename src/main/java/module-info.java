@@ -7,6 +7,6 @@ module com.example.demo {
     requires com.oracle.database.jdbc;
 
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
+    opens com.example.main to javafx.fxml;
+    exports com.example.main;
 }

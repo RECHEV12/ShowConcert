@@ -1,8 +1,6 @@
 package member.dao;
 
 
-
-
 import member.dto.MemberDTO;
 
 import java.sql.Connection;
@@ -70,6 +68,48 @@ public class MemberDAO {
         return result;
 
     }
+
+
+    // 비밀번호 찾기
+    public String getMyPw(Connection conn, String id, String name) throws SQLException {
+        // 쿼리문 작성
+
+        StringBuffer query = new StringBuffer();
+
+        query.append("SELECT                 ");
+        query.append("  mem_pw               ");
+        query.append("FROM                   ");
+        query.append("  members              ");
+        query.append("  WHERE  1=1           ");
+        query.append("  AND mem_id = ?       ");
+        query.append("  AND mem_name = ?     ");
+        // Connection  객체로부터 PreparedStatment 객체 생성
+        PreparedStatement ps = conn.prepareStatement(query.toString());
+
+        int idx = 1;
+        ps.setString(idx++, id);
+        ps.setString(idx++, name);
+
+        // 쿼리문 실행
+        ResultSet rs = ps.executeQuery();
+
+
+
+        String memPw = "";
+        // 결과 처리
+
+        while (rs.next()) {
+            memPw = rs.getString("mem_pw");
+        }
+
+        rs.close();
+        ps.close();
+
+
+        return memPw;
+
+    }
+
 
     // 회원 가입 메소드(INSERT)
     public int signUp(Connection conn, MemberDTO member) throws SQLException {
@@ -163,7 +203,7 @@ public class MemberDAO {
 
         ResultSet rs = ps.executeQuery();
         int result = 0;
-        if (rs.next()){
+        if (rs.next()) {
             result = rs.getInt("count");
         }
 

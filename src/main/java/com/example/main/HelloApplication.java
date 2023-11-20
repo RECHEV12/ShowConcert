@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +13,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Concert List");
+        HelloController hc = fxmlLoader.getController();
+        hc.areYouLogin();
         stage.setScene(scene);
         stage.show();
     }

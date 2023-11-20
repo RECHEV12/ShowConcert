@@ -71,7 +71,7 @@ public class MemberService {
     // 로그인
     public MemberDTO login(MemberDTO member) {
         Connection conn = cp.getConnection();
-        MemberDTO result = new MemberDTO();
+        MemberDTO result;
         try {
             result = dao.login(conn, member);
         } catch (SQLException e) {
@@ -109,6 +109,20 @@ public class MemberService {
         return result;
 
 
+    }
+
+    public String getMyPw(String id, String name){
+        Connection conn = cp.getConnection();;
+        String result;
+        try {
+           result =  dao.getMyPw(conn, id, name);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            cp.realeaseConnection(conn);
+        }
+
+        return result;
     }
 
 
