@@ -25,7 +25,7 @@
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="eee"/>
-               <String fx:value="ebbbe"/>
+               <String fx:value="ebbb123e"/>
                <String fx:value="eaaa"/>
                <String fx:value="e222"/>
             </FXCollections>
