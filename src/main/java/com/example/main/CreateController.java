@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import member.service.MemberService;
 
 import static com.example.main.UsefullMethod.changeStage;
+import static com.example.main.UsefullMethod.moveMainStage;
 
 public class CreateController {
     @FXML
@@ -44,7 +45,7 @@ public class CreateController {
 
     @FXML
     protected void goMainStage() {
-        changeStage(idLabel, "hello-view.fxml", "Concert List");
+        moveMainStage(idLabel);
     }
 
 }

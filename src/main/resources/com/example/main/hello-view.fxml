@@ -9,35 +9,61 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="916.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.main.HelloController">
    <children>
       <Button fx:id="loginBtn" layoutX="56.0" layoutY="21.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="24.0" prefWidth="91.0" text="로그인" />
       <Label fx:id="loginStatus" layoutX="522.0" layoutY="57.0" prefHeight="24.0" prefWidth="346.0" text="로그인해주세요" />
-      <ScrollPane layoutX="56.0" layoutY="158.0" prefHeight="370.0" prefWidth="812.0">
+      <ScrollPane layoutX="56.0" layoutY="158.0" prefHeight="399.0" prefWidth="812.0">
          <content>
-            <HBox fx:id="showConcert" prefHeight="400.0" prefWidth="792.0" />
+            <VBox fx:id="showConcert" prefHeight="395.0" prefWidth="806.0" />
          </content>
       </ScrollPane>
       <DatePicker fx:id="startDay" layoutX="56.0" layoutY="60.0" prefWidth="204.0" />
-      <ComboBox fx:id="region" layoutX="421.0" layoutY="109.0" prefHeight="24.0" prefWidth="168.0" promptText="soeul">
+      <ComboBox fx:id="region" layoutX="421.0" layoutY="109.0" prefHeight="24.0" prefWidth="168.0" promptText="지역 전체">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="eee" />
-               <String fx:value="ebbb123e" />
-               <String fx:value="eaaa" />
-               <String fx:value="e222" />
+               <String fx:value="지역 전체" />
+               <String fx:value="서울" />
+               <String fx:value="인천" />
+               <String fx:value="대전" />
+               <String fx:value="광주" />
+               <String fx:value="대구" />
+               <String fx:value="울산" />
+               <String fx:value="부산" />
+               <String fx:value="제주도" />
+               <String fx:value="강원도" />
+               <String fx:value="경기도" />
+               <String fx:value="충청북도" />
+               <String fx:value="충청남도" />
+               <String fx:value="전라북도" />
+               <String fx:value="전라남도" />
+               <String fx:value="경상북도" />
+               <String fx:value="경상남도" />
             </FXCollections>
          </items>
       </ComboBox>
-      <TextField fx:id="startMoney" layoutX="56.0" layoutY="109.0" prefHeight="24.0" prefWidth="135.0" promptText="0" />
+      <ComboBox fx:id="concertType" layoutX="608.0" layoutY="109.0" prefHeight="24.0" prefWidth="159.0" promptText="종류 전체">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="종류 전체" />
+               <String fx:value="뮤지컬" />
+               <String fx:value="콘서트" />
+               <String fx:value="연극" />
+               <String fx:value="클래식" />
+               <String fx:value="전시" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+
+   <TextField fx:id="startMoney" layoutX="56.0" layoutY="109.0" prefHeight="24.0" prefWidth="135.0" promptText="0" />
       <Label layoutX="268.0" layoutY="60.0" prefHeight="24.0" prefWidth="22.0" text="~" />
       <DatePicker fx:id="endDay" layoutX="288.0" layoutY="60.0" />
       <Label layoutX="202.0" layoutY="109.0" prefHeight="24.0" prefWidth="22.0" text="~" />
-      <ComboBox fx:id="concertType" layoutX="608.0" layoutY="109.0" prefHeight="24.0" prefWidth="159.0" />
-      <Button fx:id="searchBtn" layoutX="777.0" layoutY="109.0" mnemonicParsing="false" onAction="#goLogin" prefHeight="24.0" prefWidth="91.0" text="검색" />
+      <Button fx:id="searchBtn" layoutX="777.0" layoutY="109.0" mnemonicParsing="false" onAction="#doSearch" prefHeight="24.0" prefWidth="91.0" text="검색" />
       <TextField fx:id="endMoney" layoutX="222.0" layoutY="109.0" prefHeight="24.0" prefWidth="135.0" promptText="999,999,999" />
       <Button fx:id="signBtn" layoutX="179.0" layoutY="21.0" mnemonicParsing="false" onAction="#goSignup" prefHeight="24.0" prefWidth="91.0" text="회원가입" />
+      <Button fx:id="resetBtn" layoutX="777.0" layoutY="72.0" mnemonicParsing="false" onAction="#resetConfig" prefHeight="24.0" prefWidth="91.0" text="조건 리셋"/>
    </children>
 </AnchorPane>

@@ -10,8 +10,7 @@ import member.service.MemberService;
 
 import java.io.IOException;
 
-import static com.example.main.UsefullMethod.changeStage;
-import static com.example.main.UsefullMethod.showAlertWarn;
+import static com.example.main.UsefullMethod.*;
 
 public class LoginController {
     @FXML
@@ -49,14 +48,7 @@ public class LoginController {
         if (getID.getMemId() != null) {
             memberService.login = getID;
 
-            Stage stage = (Stage) idLabel.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            HelloController hc = fxmlLoader.getController();
-            hc.areYouLogin();
-            stage.setScene(scene);
-            stage.setTitle("Concert List");
-            stage.show();
+            goMainStage();
 
         } else {
             showAlertWarn("아이디 혹은 비밀번호가 틀립니다.");
@@ -65,7 +57,7 @@ public class LoginController {
 
     @FXML
     protected void goMainStage() {
-        changeStage(idLabel, "hello-view.fxml", "Concert List");
+        moveMainStage(idLabel);
     }
 
     @FXML

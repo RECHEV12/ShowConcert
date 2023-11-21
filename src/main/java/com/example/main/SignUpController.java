@@ -61,7 +61,7 @@ public class SignUpController {
 
     @FXML
     protected void goMainStage() {
-        changeStage(idLabel, "hello-view.fxml", "Concert List");
+        moveMainStage(idLabel);
     }
 
     @FXML
@@ -146,7 +146,7 @@ public class SignUpController {
 
         if (memberService.singUp(temp)) {
             showAlertInfo("회원가입에 성공하였습니다.");
-            changeStage(idCheck, "hello-view.fxml", "Concert List");
+            moveMainStage(idCheck);
 
         } else {
             showAlertErr("회원가입에 실패하였습니다.");

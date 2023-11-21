@@ -21,7 +21,7 @@ public class ConnectionFactory {
     private ConnectionFactory() {
         Properties prop = new Properties();
         InputStream input = ConnectionFactory.class.getResourceAsStream("/config/context-db.properties");
-        this.url = prop.getProperty("url");
+
 
         try {
             prop.load(input);
