@@ -20,7 +20,7 @@
             <VBox fx:id="showConcert" prefHeight="395.0" prefWidth="806.0" />
          </content>
       </ScrollPane>
-      <DatePicker fx:id="startDay" layoutX="56.0" layoutY="60.0" prefWidth="204.0" />
+      <DatePicker fx:id="startDay" layoutX="56.0" layoutY="60.0" prefHeight="24.0" prefWidth="405.0" />
       <ComboBox fx:id="region" layoutX="421.0" layoutY="109.0" prefHeight="24.0" prefWidth="168.0" promptText="지역 전체">
          <items>
             <FXCollections fx:factory="observableArrayList">
@@ -58,12 +58,11 @@
       </ComboBox>
 
    <TextField fx:id="startMoney" layoutX="56.0" layoutY="109.0" prefHeight="24.0" prefWidth="135.0" promptText="0" />
-      <Label layoutX="268.0" layoutY="60.0" prefHeight="24.0" prefWidth="22.0" text="~" />
-      <DatePicker fx:id="endDay" layoutX="288.0" layoutY="60.0" />
       <Label layoutX="202.0" layoutY="109.0" prefHeight="24.0" prefWidth="22.0" text="~" />
       <Button fx:id="searchBtn" layoutX="777.0" layoutY="109.0" mnemonicParsing="false" onAction="#doSearch" prefHeight="24.0" prefWidth="91.0" text="검색" />
       <TextField fx:id="endMoney" layoutX="222.0" layoutY="109.0" prefHeight="24.0" prefWidth="135.0" promptText="999,999,999" />
       <Button fx:id="signBtn" layoutX="179.0" layoutY="21.0" mnemonicParsing="false" onAction="#goSignup" prefHeight="24.0" prefWidth="91.0" text="회원가입" />
-      <Button fx:id="resetBtn" layoutX="777.0" layoutY="72.0" mnemonicParsing="false" onAction="#resetConfig" prefHeight="24.0" prefWidth="91.0" text="조건 리셋"/>
+      <Button fx:id="resetBtn" layoutX="777.0" layoutY="72.0" mnemonicParsing="false" onAction="#resetConfig" prefHeight="24.0" prefWidth="91.0" text="조건 리셋" />
    </children>
+   
 </AnchorPane>

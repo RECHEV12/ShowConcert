@@ -50,12 +50,12 @@ public class ConcertService {
         return result;
     }
 
-    public ArrayList<ConcertDTO> selectOnlyStartDay(String startDay){
+    public ArrayList<ConcertDTO> allDay(){
         Connection conn = cp.getConnection();
         ArrayList<ConcertDTO> result;
 
         try {
-            result = dao.selectOnlyStartDay(conn, startDay);
+            result = dao.selectAllDay(conn);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }finally {

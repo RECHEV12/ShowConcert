@@ -136,10 +136,9 @@ public class ConcertDAO {
 
     /**
      * 시작일만 있을 경우 사용
-     * @param startDay 시작 날짜
      * @return 콘서트 객체 배열
      */
-    public ArrayList<ConcertDTO> selectOnlyStartDay(Connection conn, String startDay) throws SQLException {
+    public ArrayList<ConcertDTO> selectAllDay(Connection conn) throws SQLException {
         StringBuffer query = new StringBuffer();
 
         query.append("  SELECT               ");
@@ -154,17 +153,10 @@ public class ConcertDAO {
         query.append("      co_eventSite     ");
         query.append("  FROM                 ");
         query.append("      CONCERTS         ");
-        query.append("  WHERE 1=1            ");
-        query.append("  AND CO_PERIOD LIKE ? ");
 
 
 
         PreparedStatement ps = conn.prepareStatement(query.toString());
-
-        int idx = 1;
-
-        ps.setString(idx++, startDay + "%");
-
 
         ResultSet rs = ps.executeQuery();
 
@@ -180,8 +172,7 @@ public class ConcertDAO {
             long charge = rs.getInt("co_charge");
             String type = rs.getString("co_type");
             String eventSite = rs.getString("co_eventSite");
-            System.out.println(period);
-            System.out.println(title);
+
 
 
             ConcertDTO concert = new ConcertDTO(period, tel, evPeriod, title, url, imgUrl, charge, type, eventSite);

@@ -2,6 +2,8 @@ package com.example.main;
 
 import concert.dto.ConcertDTO;
 import concert.service.ConcertService;
+import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -11,6 +13,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import member.service.MemberService;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,8 +35,6 @@ public class HelloController {
     @FXML
     private DatePicker startDay;
     @FXML
-    private DatePicker endDay;
-    @FXML
     private ComboBox region;
     @FXML
     private ComboBox concertType;
@@ -42,17 +45,42 @@ public class HelloController {
     @FXML
     private Button signBtn;
 
-    MemberService memberService = MemberService.getInstance();
-    ConcertService concertService = ConcertService.getInstance();
     ArrayList<HBox> hBoxList = new ArrayList<>();
     ArrayList<ConcertDTO> selectedDate = new ArrayList<>();
+    ArrayList<ConcertDTO> allDay = new ArrayList<>();
+    ArrayList<Integer> dateIdx = new ArrayList<>();
+    ArrayList<Long> startDateNum = new ArrayList<>();
+    ArrayList<Long> endDateNum = new ArrayList<>();
+
+    MemberService memberService = MemberService.getInstance();
+
+
+    private HostServices hostServices;
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
+    }
+
+    public void setAllDayList(ArrayList<ConcertDTO> allDay) {
+        this.allDay = allDay;
+    }
+
+    @FXML
+    protected void goUrl(String url) {
+        System.out.println(url);
+        if (hostServices != null) {
+
+            hostServices.showDocument(url);
+        }
+
+    }
 
     @FXML
     protected void doSearch() {
-        if (memberService.login == null){
-            UsefullMethod.showAlertWarn("먼저 로그인을 해주세요.");
-            return;
-        }
+//        if (memberService.login == null) {
+//            UsefullMethod.showAlertWarn("먼저 로그인을 해주세요.");
+//            return;
+//        }
 
         // 리스트 지우고 새로 띄우기
         showConcert.getChildren().clear();
@@ -61,20 +89,25 @@ public class HelloController {
 
         // 날짜 가져오기
         String startDate = startDay.getValue().toString().replace("-", "");
-        String endDate = endDay.getValue().toString().replace("-", "");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        long nowDateMill = 0;
+        try {
+            Date temp = sdf.parse(startDate);
+            nowDateMill = temp.getTime();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
-        //todo 이거 는 좀 나중에
-        String selectDate = startDate + " ~ " + endDate;
+        dateCheck(nowDateMill, startDateNum, endDateNum);
 
 
         // 날짜에 따른 리스트 정리
-        if (endDate.equals("20991231")) {
-            selectedDate = concertService.selectOnlyStartDay(startDate);
-        } else {
-            selectedDate = concertService.selectDay(startDate, endDate);
+        for (int i = 0 ; i <dateIdx.size();i++){
+            ConcertDTO temp = allDay.get(dateIdx.get(i));
+            selectedDate.add(temp);
         }
 
-
+        System.out.println(selectedDate);
         // 가격이 정해져 있을 시 입력
         int min = 0;
         int max = 99999999;
@@ -166,6 +199,7 @@ public class HelloController {
             vBox.setPrefWidth(260);
             vBox.setPrefHeight(390);
             vBox.setAlignment(Pos.CENTER);
+            vBox.setOnMouseClicked(event -> goUrl(temp.getCo_url()));
 
             BorderStroke stroke = new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, null, new BorderWidths(1, 1, 1, 1));
             Border border = new Border(stroke);
@@ -197,13 +231,6 @@ public class HelloController {
             concertType.setValue("종류 전체");
         }
 
-        String co_period; /*공연 기간*/
-        String co_tel;/*문의 안내*/
-        long co_evPeriod;/*개최기간을 숫자로*/
-        String co_title;/*제목*/
-        String co_url; /*해당 소개 링크*/
-        String co_imgUrl; /*이미지 url*/
-
     }
 
 
@@ -225,7 +252,6 @@ public class HelloController {
         LocalDate localDate = LocalDate.now();
         LocalDate targetDate = LocalDate.of(2099, 12, 31);
         startDay.setValue(localDate);
-        endDay.setValue(targetDate);
     }
 
     /**
@@ -289,12 +315,14 @@ public class HelloController {
         return tempList;
     }
 
+    /**
+     * 설정 초기화
+     */
     @FXML
     protected void resetConfig() {
         LocalDate localDate = LocalDate.now();
         LocalDate targetDate = LocalDate.of(2099, 12, 31);
         startDay.setValue(localDate);
-        endDay.setValue(targetDate);
         startMoney.setText("0");
         endMoney.setText("99999999");
         region.setValue("지역 전체");
@@ -305,6 +333,9 @@ public class HelloController {
 
     }
 
+    /**
+     * 콤보박스의 value가 null인지 아닌지 체크하는 메소드
+     */
     protected void nullChk() {
         String regionVal = (String) region.getValue();
         String type = (String) concertType.getValue();
@@ -314,6 +345,39 @@ public class HelloController {
         }
         if (type != null && type.equals("종류 전체")) {
             concertType.setValue(null);
+        }
+    }
+
+    /**
+     * 날짜를 밀리초단위로 담는 메소드
+     *
+     * @param allDay 어플리케이션 딴에서 가져온 모든 목록 리스트
+     */
+    protected void firstBooting(ArrayList<ConcertDTO> allDay) {
+        System.out.println(allDay.size());
+        System.out.println("시작");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        for (int i = 0; i < allDay.size(); i++) {
+            try {
+                startDateNum.add(sdf.parse(allDay.get(i).getCo_period().substring(0, 8)).getTime());
+                endDateNum.add(sdf.parse(allDay.get(i).getCo_period().substring(11)).getTime());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println("끝");
+
+    }
+
+    protected void dateCheck(long selectedDate, ArrayList<Long> startDateNum, ArrayList<Long> endDateNum) {
+
+        for (int i = 0; i < startDateNum.size(); i++) {
+            if (startDateNum.get(i) <= selectedDate) {
+                if (endDateNum.get(i) >= selectedDate) {
+                    dateIdx.add(i);
+                }
+            }
         }
     }
 }
