@@ -119,8 +119,7 @@ public class ConcertDAO {
             long charge = rs.getInt("co_charge");
             String type = rs.getString("co_type");
             String eventSite = rs.getString("co_eventSite");
-            System.out.println(period);
-            System.out.println(title);
+
 
 
             ConcertDTO concert = new ConcertDTO(period, tel, evPeriod, title, url, imgUrl, charge, type, eventSite);

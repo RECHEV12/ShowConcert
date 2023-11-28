@@ -48,7 +48,7 @@ public class DataParsing {
             long evPeriod = (long)item.get("eventPeriod");
             String title = (String)item.get("title");
             String url = (String)item.get("url");
-            System.out.println(item);
+
 
 
             ConcertDTO concert = new ConcertDTO(period, tel, evPeriod, title, url, "",0,"","");

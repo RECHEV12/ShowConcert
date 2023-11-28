@@ -32,7 +32,6 @@ public class ConnectionFactory {
             this.maxConn = Integer.parseInt(prop.getProperty("maxConn"));
 
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            System.out.println();
             System.out.println("성공");
         } catch (IOException e) {
             System.exit(0);

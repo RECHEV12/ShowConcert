@@ -79,7 +79,7 @@ public class SignUpController {
             idCheck.setText("사용 가능한 아이디 입니다.");
             idCheck.setTextFill(Paint.valueOf("blue"));
         }
-        System.out.println(idChk);
+
     }
 
 

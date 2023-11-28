@@ -77,10 +77,10 @@ public class HelloController {
 
     @FXML
     protected void doSearch() {
-//        if (memberService.login == null) {
-//            UsefullMethod.showAlertWarn("먼저 로그인을 해주세요.");
-//            return;
-//        }
+        if (memberService.login == null) {
+            UsefullMethod.showAlertWarn("먼저 로그인을 해주세요.");
+            return;
+        }
 
         // 리스트 지우고 새로 띄우기
         showConcert.getChildren().clear();
@@ -99,6 +99,8 @@ public class HelloController {
         }
 
         dateCheck(nowDateMill, startDateNum, endDateNum);
+        System.out.println(dateIdx);
+
 
 
         // 날짜에 따른 리스트 정리
@@ -307,7 +309,7 @@ public class HelloController {
         ArrayList<ConcertDTO> tempList = new ArrayList<>();
 
         for (int i = 0; i < conList.size(); i++) {
-            String nowSite = conList.get(i).getCo_eventSite();
+            String nowSite = conList.get(i).getCo_type();
             if (nowSite.equals(type)) {
                 tempList.add(conList.get(i));
             }

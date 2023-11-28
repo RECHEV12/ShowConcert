@@ -1,5 +1,7 @@
 package com.example.main;
 
+import concert.dto.ConcertDTO;
+import concert.service.ConcertService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -7,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 화면 전환 메소드
@@ -30,6 +33,9 @@ public class UsefullMethod {
     }
 
     public static void moveMainStage(Label nowLabel) {
+    ArrayList<ConcertDTO> allDay;
+        ConcertService concertService = ConcertService.getInstance();
+        allDay = concertService.allDay();
 
         Stage stage = (Stage) nowLabel.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
@@ -39,6 +45,8 @@ public class UsefullMethod {
             Scene scene = new Scene(fxmlLoader.load());
             HelloController hc = fxmlLoader.getController();
 
+            hc.setAllDayList(allDay);
+            hc.firstBooting(allDay);
             hc.areYouLogin();
             stage.setScene(scene);
             stage.setTitle("Concert List");
