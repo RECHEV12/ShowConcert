@@ -1,8 +1,6 @@
 package com.example.main;
 
 import concert.dto.ConcertDTO;
-import concert.service.ConcertService;
-import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,8 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import member.service.MemberService;
-
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -42,8 +38,7 @@ public class HelloController {
     private TextField startMoney;
     @FXML
     private TextField endMoney;
-    @FXML
-    private Button signBtn;
+
 
     ArrayList<HBox> hBoxList = new ArrayList<>();
     ArrayList<ConcertDTO> selectedDate = new ArrayList<>();
@@ -89,7 +84,7 @@ public class HelloController {
         // 날짜 가져오기
         String startDate = startDay.getValue().toString().replace("-", "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-        long nowDateMill = 0;
+        long nowDateMill;
         try {
             Date temp = sdf.parse(startDate);
             nowDateMill = temp.getTime();
@@ -250,7 +245,6 @@ public class HelloController {
             loginBtn.setText("로그아웃");
         }
         LocalDate localDate = LocalDate.now();
-        LocalDate targetDate = LocalDate.of(2099, 12, 31);
         startDay.setValue(localDate);
     }
 
@@ -321,7 +315,6 @@ public class HelloController {
     @FXML
     protected void resetConfig() {
         LocalDate localDate = LocalDate.now();
-        LocalDate targetDate = LocalDate.of(2099, 12, 31);
         startDay.setValue(localDate);
         startMoney.setText("0");
         endMoney.setText("99999999");

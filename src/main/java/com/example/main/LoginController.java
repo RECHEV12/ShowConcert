@@ -1,32 +1,14 @@
 package com.example.main;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import member.dto.MemberDTO;
 import member.service.MemberService;
-
-import java.io.IOException;
-
 import static com.example.main.UsefullMethod.*;
 
 public class LoginController {
     @FXML
     private Label idLabel;
-
-    @FXML
-    private Label pwLabel;
-
-    @FXML
-    private Button submitLogin;
-
-    @FXML
-    private Label createId;
-
-    @FXML
-    private Label findId;
 
     @FXML
     private TextField inputId;
@@ -36,7 +18,7 @@ public class LoginController {
     MemberService memberService = MemberService.getInstance();
 
     @FXML
-    protected void doLogin() throws IOException {
+    protected void doLogin(){
         String id = inputId.getText();
         String pw = inputPw.getText();
 

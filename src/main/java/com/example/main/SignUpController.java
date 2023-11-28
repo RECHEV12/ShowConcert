@@ -1,7 +1,6 @@
 package com.example.main;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,25 +24,17 @@ public class SignUpController {
     @FXML
     private TextField inputName;
 
-    @FXML
-    private Button signBtn;
+
 
     @FXML
     private Label idLabel;
-    @FXML
-    private Label pwLabel;
-    @FXML
-    private Label repwLabel;
-    @FXML
-    private Label nameLabel;
+
     @FXML
     private Label idCheck;
-    @FXML
-    private Label pwRegret;
+
     @FXML
     private Label pwCheck;
-    @FXML
-    private Button goMain;
+
 
     MemberService memberService = MemberService.getInstance();
 

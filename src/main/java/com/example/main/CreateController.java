@@ -1,29 +1,21 @@
 package com.example.main;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import member.service.MemberService;
 
-import static com.example.main.UsefullMethod.changeStage;
 import static com.example.main.UsefullMethod.moveMainStage;
 
 public class CreateController {
     @FXML
     private Label idLabel;
     @FXML
-    private Label nameLabel;
-    @FXML
     private Label resultLabel;
     @FXML
     private TextField inputId;
     @FXML
     private TextField inputName;
-    @FXML
-    private Button searchBtn;
-    @FXML
-    private Button goMain;
 
     MemberService memberService = MemberService.getInstance();
 
