@@ -67,7 +67,6 @@ public class HelloController {
 
     @FXML
     protected void goUrl(String url) {
-        System.out.println(url);
         if (hostServices != null) {
 
             hostServices.showDocument(url);
@@ -99,7 +98,7 @@ public class HelloController {
         }
 
         dateCheck(nowDateMill, startDateNum, endDateNum);
-        System.out.println(dateIdx);
+
 
 
 
@@ -109,7 +108,7 @@ public class HelloController {
             selectedDate.add(temp);
         }
 
-        System.out.println(selectedDate);
+
         // 가격이 정해져 있을 시 입력
         int min = 0;
         int max = 99999999;
@@ -122,8 +121,7 @@ public class HelloController {
 
         selectedDate = setChargeList(selectedDate, min, max);
 
-        System.out.println(region.getValue());
-        System.out.println(concertType.getValue());
+
         // 값이 전체일 경우 모두 긁을 수 있게 값을 null값 지정
 
 

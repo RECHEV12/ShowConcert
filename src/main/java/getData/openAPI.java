@@ -54,7 +54,7 @@ public class openAPI {
 
         JSONObject json =   (JSONObject) jsonResp.get("response");
         JSONObject body =  ((JSONObject)json.get("body"));
-        System.out.println(json);
+
 
 //        String path = System.getProperty("user.dir");
 //        FileWriter writer = new FileWriter(path + "/src/files/data1.txt");
