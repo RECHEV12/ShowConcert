@@ -2,6 +2,7 @@ package com.example.main;
 
 import concert.dto.ConcertDTO;
 import concert.service.ConcertService;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  * 화면 전환 메소드
  */
 public class UsefullMethod {
+    public static HostServices hostServices;
     public static void changeStage(Label nowLabel, String changeScene, String stageName) {
 
         Stage stage = (Stage) nowLabel.getScene().getWindow();
@@ -44,7 +46,7 @@ public class UsefullMethod {
         try {
             Scene scene = new Scene(fxmlLoader.load());
             HelloController hc = fxmlLoader.getController();
-
+            hc.setHostServices(hostServices);
             hc.setAllDayList(allDay);
             hc.firstBooting(allDay);
             hc.areYouLogin();

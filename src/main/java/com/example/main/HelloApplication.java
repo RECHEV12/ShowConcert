@@ -21,6 +21,7 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Concert List");
         HelloController hc = fxmlLoader.getController();
+        UsefullMethod.hostServices = getHostServices();
         hc.setHostServices(getHostServices());
         hc.setAllDayList(allDay);
         hc.firstBooting(allDay);

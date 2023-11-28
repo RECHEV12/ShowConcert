@@ -7,6 +7,7 @@ import member.service.MemberService;
 
 import static com.example.main.UsefullMethod.moveMainStage;
 
+
 public class CreateController {
     @FXML
     private Label idLabel;
